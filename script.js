@@ -1,18 +1,16 @@
-const container = document.getElementById('container');
-const text = document.getElementById('text');
-const button = document.getElementById('toggleButton');
+const generateButton = document.getElementById('generateButton');
+const result = document.getElementById('result');
 
-let toggled = false;
+generateButton.addEventListener('click', () => {
+    const minValue = parseInt(document.getElementById('minValue').value);
+    const maxValue = parseInt(document.getElementById('maxValue').value);
 
-button.addEventListener('click', () => {
-    if (!toggled) {
-        container.style.backgroundColor = 'lightcoral';
-        text.textContent = 'Text Changed!';
-        button.textContent = 'Revert';
+    if (isNaN(minValue) || isNaN(maxValue) || minValue > maxValue) {
+        result.textContent = 'Please enter valid minimum and maximum values!';
+        result.style.color = 'red';
     } else {
-        container.style.backgroundColor = 'lightblue';
-        text.textContent = 'Initial Text';
-        button.textContent = 'Click Me!';
+        const randomNumber = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+        result.textContent = `Generated Number: ${randomNumber}`;
+        result.style.color = 'black';
     }
-    toggled = !toggled;
 });
